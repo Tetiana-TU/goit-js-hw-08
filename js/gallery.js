@@ -63,11 +63,11 @@ const images = [
     description: 'Lighthouse Coast Sea',
   },
 ];
-const creatGalleryCard = document.querySelector('.gallery');
+const picture = document.querySelector('.gallery');
 
-const pictureInfo = images
+const pictureCard = images
   .map(
-    image => `<li class="gallery-list">
+    image => `<li class="gallery-item">
   <a class="gallery-link" href="${image.original}">
     <img
       class="gallery-image"
@@ -81,9 +81,9 @@ const pictureInfo = images
   )
   .join('');
 
-creatGalleryCard.insertAdjacentHTML('afterbegin', pictureInfo);
+picture.insertAdjacentHTML('afterbegin', pictureCard);
 
-creatGalleryCard.addEventListener('click', event => {
+picture.addEventListener('click', event => {
   if (event.target.tagName === 'IMG') {
     event.preventDefault();
 
@@ -94,4 +94,3 @@ creatGalleryCard.addEventListener('click', event => {
     instance.show();
   }
 });
-
