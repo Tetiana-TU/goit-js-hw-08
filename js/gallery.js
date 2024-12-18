@@ -63,35 +63,37 @@ const images = [
     description: 'Lighthouse Coast Sea',
   },
 ];
-
-const creatGalleryCard = document.querySelector('.gallery');
-
-const markup = images
-  .map(
-    image => `<li class="gallery-item">
-  <a class="gallery-link" href="${image.original}">
+const creatImgCard = picture => {
+  return `
+  <li class="gallery-item">
+  <a class="gallery-link" href="${picture.original}">
     <img
       class="gallery-image"
-      src="${image.preview}"
-      data-source="${image.original}"
-      alt="${image.description}"
+      src="${picture.preview}"
+      data-source="${picture.original}"
+      alt="${picture.description}"
     />
   </a>
-</li>
-`
-  )
-  .join('');
+</li>`;
+};
+const picturesCardarray = images.map((el)=>creatImgCard(el)).join('');
 
-creatGalleryCard.insertAdjacentHTML('afterbegin', markup);
+const pictureListEl=document.querySelector('.gallery');
+pictureListEl.innerHTML = picturesCardarray;
+  
+pictureListEl.addEventListener('click', event =>{if(event.target===event.currentTarget){
+  return;
+}})
 
-creatGalleryCard.addEventListener('click', event => {
+pictureListEl.addEventListener('click', event => {
   if (event.target.tagName === 'IMG') {
     event.preventDefault();
-
+  }
     const instance = basicLightbox.create(
       `<img src="${event.target.dataset.source}">`
     );
 
     instance.show();
-  }
+  
 });
+
